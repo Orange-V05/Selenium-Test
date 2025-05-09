@@ -2,16 +2,16 @@ package pages;
 
 import base.BasePage;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
-public class LogoutPage extends BasePage {
+public class LogoutPage {
     private By logoutButton = By.id("logoutButton");
 
-    public LogoutPage(WebDriver driver) {
-        super(driver);
+    // Constructor that no longer takes a WebDriver argument
+    public LogoutPage() {
+        // No need to pass WebDriver to BasePage constructor anymore
     }
 
     public void logout() {
-        driver.findElement(logoutButton).click();
+        BasePage.getDriver().findElement(logoutButton).click();
     }
 }

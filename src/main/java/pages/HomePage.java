@@ -2,22 +2,22 @@ package pages;
 
 import base.BasePage;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
-public class HomePage extends BasePage {
+public class HomePage {
     private By contactLink = By.linkText("Contact Us");
     private By signInLink = By.linkText("Sign In");
 
-    public HomePage(WebDriver driver) {
-        super(driver);
+    // Constructor does not take WebDriver as an argument
+    public HomePage() {
+        // No need to pass WebDriver to the constructor
     }
 
     public void goToContactPage() {
-        driver.findElement(contactLink).click();
+        BasePage.getDriver().findElement(contactLink).click();
     }
 
     public LoginPage clickSignIn() {
-        driver.findElement(signInLink).click();
-        return new LoginPage(driver);
+        BasePage.getDriver().findElement(signInLink).click();
+        return new LoginPage(BasePage.getDriver()); // Pass WebDriver to LoginPage constructor
     }
 }

@@ -10,10 +10,12 @@ import java.time.Duration;
 import java.util.Properties;
 
 public class BasePage {
-    protected WebDriver driver;
-    protected WebDriverWait wait;
+    // Make these static to allow usage in static context in tests
+    private static WebDriver driver;
+    private static WebDriverWait wait;
     private static Properties properties;
 
+    // Static block to load properties from config
     static {
         try {
             properties = new Properties();
@@ -26,38 +28,34 @@ public class BasePage {
         }
     }
 
-    // Constructor to initialize WebDriver and WebDriverWait
-    public BasePage(WebDriver driver) {
-        this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-    }
-
-    // Static method to create and return a new WebDriver instance
-    public static WebDriver createDriver() {
+    // Static method to initialize WebDriver and WebDriverWait
+    public static void setUp() {
         String chromeDriverPath = getProperty("chromedriver.path");
         System.setProperty("webdriver.chrome.driver", chromeDriverPath);
 
-        WebDriver driver = new ChromeDriver();
+        driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    }
+
+    // Getter for WebDriver instance (static)
+    public static WebDriver getDriver() {
         return driver;
     }
 
-    // Common utility method to get the current page title
-    public String getPageTitle() {
-        if (driver == null) {
-            throw new IllegalStateException("WebDriver is not initialized.");
-        }
-        return driver.getTitle();
+    // Getter for WebDriverWait instance (static)
+    public static WebDriverWait getWait() {
+        return wait;
     }
 
-    // Common utility method to get properties from config
+    // Utility method to get properties from config
     public static String getProperty(String key) {
         return properties.getProperty(key);
     }
 
-    // Utility method to close the driver
-    public void tearDown() {
+    // Static method to close the driver
+    public static void tearDown() {
         if (driver != null) {
             driver.quit();
         }

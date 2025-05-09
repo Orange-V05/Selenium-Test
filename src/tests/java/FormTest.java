@@ -9,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import java.time.Duration;
 
 public class FormTest {
     private WebDriver driver;
@@ -24,7 +25,7 @@ public class FormTest {
         driver.get(BasePage.getProperty("case.tracker.url"));
 
         // Wait for the form fields to be visible
-        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));  // Corrected to use Duration
 
         WebElement nameField = wait.until(ExpectedConditions.visibilityOfElementLocated(
                 By.xpath("//input[@name='name']")));  // Complex XPath for name field

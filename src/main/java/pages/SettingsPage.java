@@ -4,14 +4,16 @@ import base.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class SettingsPage extends BasePage {
+public class SettingsPage {
     private By settingsHeader = By.tagName("h1");
 
-    public SettingsPage(WebDriver driver) {
-        super(driver);
+    // No need to pass the WebDriver here
+    public SettingsPage() {
+        // No need to initialize WebDriver in the constructor
     }
 
     public boolean isAtSettingsPage() {
-        return driver.findElement(settingsHeader).getText().contains("Settings");
+        // Directly use the static WebDriver instance from BasePage
+        return BasePage.getDriver().findElement(settingsHeader).getText().contains("Settings");
     }
 }

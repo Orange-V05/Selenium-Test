@@ -7,7 +7,6 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.By;
@@ -19,7 +18,7 @@ import base.BasePage;
 import java.util.Set;
 
 @TestMethodOrder(OrderAnnotation.class)
-public class AdvancedSeleniumTests {
+public class AdvancedSeleniumTest {
     private static WebDriver driver;
     private static HomePage homePage;
 
@@ -28,7 +27,7 @@ public class AdvancedSeleniumTests {
         BasePage.setUp();
         driver = BasePage.getDriver();
         driver.get(BasePage.getProperty("base.url"));
-        homePage = new HomePage(driver);
+        homePage = new HomePage();  // No need to pass WebDriver here
     }
 
     @Test

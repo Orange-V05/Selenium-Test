@@ -18,7 +18,7 @@ public class SignUpTest {
         BasePage.setUp();
         driver = BasePage.getDriver();
         driver.get(BasePage.getProperty("base.url"));
-        homePage = new HomePage(driver);
+        homePage = new HomePage();  // No longer passing WebDriver here
     }
 
     @Test
