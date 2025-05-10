@@ -19,6 +19,7 @@ public class StaticPageTest {
     public void testContactPage() {
         driver.get(BasePage.getProperty("contact.url"));
         String title = driver.getTitle();
+        System.out.println("Page Title: " + title); // ✅ Print the title to console
         // Add assertion to verify the title
         assert title != null && !title.isEmpty();
     }
