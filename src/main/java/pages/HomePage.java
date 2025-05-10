@@ -20,4 +20,9 @@ public class HomePage {
         BasePage.getDriver().findElement(signInLink).click();
         return new LoginPage(BasePage.getDriver()); // Pass WebDriver to LoginPage constructor
     }
+
+    // ✅ Method to read the page title
+    public String getPageTitle() {
+        return BasePage.getDriver().getTitle();
+    }
 }
